@@ -5,6 +5,25 @@
 </head>
 <body>
     <h1>Welcome to the Visitor Count Example</h1>
-    <p>This page has been visited <span id="count"><?php include 'count.txt'; ?></span> times.</p>
+    
+    <?php
+    $ipAddress = $_SERVER['REMOTE_ADDR']; // Get the user's IP address
+
+    $countFile = 'count.txt';
+
+    // Read the existing IP addresses from the file into an array
+    $existingIPs = file($countFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    if (!in_array($ipAddress, $existingIPs)) {
+        // If the IP address is not in the list, it's a new visitor
+        $existingIPs[] = $ipAddress; // Add the IP address to the array
+        file_put_contents($countFile, implode("\n", $existingIPs)); // Save the updated list
+    }
+
+    // Display the count of unique IP addresses
+    $visitorCount = count($existingIPs);
+    ?>
+
+    <p>This page has been visited by <?php echo $visitorCount; ?> unique IP addresses.</p>
 </body>
 </html>
