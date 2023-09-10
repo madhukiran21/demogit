@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Visitor Count Example</title>
+    <title>Visitor Count and IP Address Example</title>
 </head>
 <body>
-    <h1>Welcome to the Visitor Count Example</h1>
+    <h1>Welcome to the Visitor Count and IP Address Example</h1>
     
     <?php
     $ipAddress = $_SERVER['REMOTE_ADDR']; // Get the user's IP address
@@ -25,5 +25,17 @@
     ?>
 
     <p>This page has been visited by <?php echo $visitorCount; ?> unique IP addresses.</p>
+
+    <button id="getIpAddressButton">Get My IP Address</button>
+    <p>Your IP address will be displayed here:</p>
+    <p id="ipAddressDisplay"></p>
+
+    <script>
+        document.getElementById('getIpAddressButton').addEventListener('click', function() {
+            // When the button is clicked, display the user's IP address
+            var ipAddressDisplay = document.getElementById('ipAddressDisplay');
+            ipAddressDisplay.textContent = "Your IP Address: <?php echo $ipAddress; ?>";
+        });
+    </script>
 </body>
 </html>
