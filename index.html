@@ -18,6 +18,9 @@
         // If the IP address is not in the list, it's a new visitor
         $existingIPs[] = $ipAddress; // Add the IP address to the array
         file_put_contents($countFile, implode("\n", $existingIPs)); // Save the updated list
+    } else {
+        // If the IP address is already in the list, it's a returning visitor
+        echo '<script>alert("You have already visited this page.");</script>';
     }
 
     // Display the count of unique IP addresses
